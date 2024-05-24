@@ -149,12 +149,12 @@ existiert und geben Sie gegeben falls einen möglichen an.
 \textbf{Hinweis}: Gegeben 2 Transaktionen \texttt{a} und \texttt{b} $a != b$ und eine Tabelle X so gilt:
 
 \begin{itemize}
-    \item wenn \texttt{R, a, X} vor \texttt{W, b, X} dann \texttt{a} vor \texttt{b} im seriellen Plan)
-    \item wenn \texttt{W, a, X} vor \texttt{R, b, X} dann \texttt{a} vor \texttt{b} im seriellen Plan)
-    \item wenn \texttt{W, a, X} vor \texttt{W, b, X} dann \texttt{a} vor \texttt{b} im seriellen Plan)
+    \item wenn \texttt{(R, a, X)} vor \texttt{(W, b, X)} dann \texttt{a} vor \texttt{b} im seriellen Plan)
+    \item wenn \texttt{(W, a, X)} vor \texttt{(R, b, X)} dann \texttt{a} vor \texttt{b} im seriellen Plan)
+    \item wenn \texttt{(W, a, X)} vor \texttt{(W, b, X)} dann \texttt{a} vor \texttt{b} im seriellen Plan)
 \end{itemize}
 
-\begin{table}[]
+\begin{table}[htbp]
     \begin{tabular}{|l|l|l|l|}
         \hline
         Id & AT & Tx & Table \\ \hline
@@ -177,8 +177,134 @@ existiert und geben Sie gegeben falls einen möglichen an.
     \end{tabular}
 \end{table}
 
-\begin{figure}[]
+Abhängigkeiten für Tabelle \texttt{A}:
+
+\begin{itemize}
+    \item \texttt{(R, 1, A)} vor \texttt{(W, 2, A)}: Tx \texttt{1} $\rightarrow$ Tx \texttt{2}
+    \item \texttt{(W, 1, A)} vor \texttt{(R, 2, A)}: Tx \texttt{1} $\rightarrow$ Tx \texttt{2}
+    \item \texttt{(W, 1, A)} vor \texttt{(R, 3, A)}: Tx \texttt{1} $\rightarrow$ Tx \texttt{3}
+    \item \texttt{(W, 1, A)} vor \texttt{(W, 4, A)}: Tx \texttt{1} $\rightarrow$ Tx \texttt{4}
+    \item \texttt{(W, 1, A)} vor \texttt{(W, 8, A)}: Tx \texttt{1} $\rightarrow$ Tx \texttt{8}
+    \item \texttt{(W, 2, A)} vor \texttt{(R, 3, A)}: Tx \texttt{2} $\rightarrow$ Tx \texttt{3}
+    \item \texttt{(W, 2, A)} vor \texttt{(W, 4, A)}: Tx \texttt{2} $\rightarrow$ Tx \texttt{4}
+    \item \texttt{(W, 2, A)} vor \texttt{(W, 8, A)}: Tx \texttt{2} $\rightarrow$ Tx \texttt{8}
+\end{itemize}
+
+Abhängigkeiten für Tabelle \texttt{B}:
+
+\begin{itemize}
+    \item \texttt{(R, 7, B)} vor \texttt{(W, 1, B)}: Tx \texttt{7} $\rightarrow$ Tx \texttt{1}
+    \item \texttt{(R, 1, B)} vor \texttt{(W, 2, B)}: Tx \texttt{1} $\rightarrow$ Tx \texttt{2}
+    \item \texttt{(W, 1, B)} vor \texttt{(R, 2, B)}: Tx \texttt{1} $\rightarrow$ Tx \texttt{2}
+    \item \texttt{(W, 1, B)} vor \texttt{(R, 5, B)}: Tx \texttt{1} $\rightarrow$ Tx \texttt{5}
+    \item \texttt{(W, 1, B)} vor \texttt{(W, 8, B)}: Tx \texttt{1} $\rightarrow$ Tx \texttt{8}
+    \item \texttt{(W, 2, B)} vor \texttt{(R, 5, B)}: Tx \texttt{2} $\rightarrow$ Tx \texttt{5}
+    \item \texttt{(W, 2, B)} vor \texttt{(W, 8, B)}: Tx \texttt{2} $\rightarrow$ Tx \texttt{8}
+    \item \texttt{(R, 5, B)} vor \texttt{(W, 8, B)}: Tx \texttt{5} $\rightarrow$ Tx \texttt{8}
+\end{itemize}
+
+Abhängigkeiten für Tabelle \texttt{C}:
+
+Es gibt keine schreioperationen für Tabelle \texttt{C}
+
+\begin{figure}[htbp]
+    \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_02/dependency_graph}
+    \caption{Dependency Graph}
+    \label{fig:a02_dependency_graph}
 \end{figure}
+
+\newpage
+
+\chapter{Scheduling (Partnerarbeit)}
+
+Aurora hat ein Problem: Sie hat heute einige Aufgabe zu erledigen, aber keine echte Lust dazu.
+
+In \texttt{Precedences.dot} finden Sie einen Graphen, der die Reihenfolgenbedingung der heutigen Tätigkeiten beinhaltet.
+Zusätzlich benötigen Aufgaben, wenn sie an anderen Orten in der Wohnung erledigt, werden unterschiedlich viel Zeit.
+Diese Informaionen entnehmen Sie \texttt{Costs.dot}.
+Die Kosten die Aurora aufwenden muss, um von einem ort zum anderen zu kommen finden Sie in \texttt{Places.dot}.
+
+(Achten Sie beim Enlesen auf das Encoding/Umlaute und ob die Gewichte auch wirklich als Zahlen interpretiert werden)
+
+Nutzen Sie einen geeigneten Algorithmus (tiefensuche, Breitensuche, Branch-Bound, etc.) um die günstigste Lösung für Auroras Problem zu finden.
+
+
+\chapter{Snake}
+
+Ein Optimaler Snake-Spieler, der Garantiert die maximale Punkte Anuzahl erreichen möchte, wählt einen Hamilton Zyklus auf dem Spielfeld und folgt diesem stur, bis die Schlange die maximale Länge erreicht hat, ohne sich von Futterknoten (schwarz) ablenken zu lassen (da er/sie sie sicher reichen wird).
+Finen Sie wenn möglich für beide Spielfelder einen Solchen Zyklus (beginnend in der linken operen Ecke) oder begründen Sie, warum dieser nicht existiert.
+
+\newpage
+
+\chapter{Kürzeste Wege Djikstra vs A*}
+
+Finden Sie den kürzesten Weg von Kloten \texttt{s} zu Knoten \texttt{z} mit Hilfe des Djikstra und A* Algorithmus.
+Geben Sie das Ergebnis (Länge und kürzester Weg) sowie die Zustände der Variablen F, dist, und W am beginn jeder Schleife und am Ende des Algorithmus aus.
+Die roten werte bei den Knoten entsprechen jener der Heursistik für diesen Knoten.
+
+Wie viele Knoten expandiert (d.h. hinzufügen in F) der Algorithmus von Djikstra und wie viele der A*?
+
+\section{Djikstra}\label{sec:djikstra}
+\begin{minted}[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    bgcolor=LightGray,
+    linenos,
+    breaklines
+]{text}
+F: {'s'} - dist: {'s': 0, 'a': inf, 'b': inf, 'c': inf, 'd': inf, 'e': inf, 'f': inf, 'g': inf, 'h': inf, 'i': inf, 'z': inf} - W: {'s': ['s'], 'a': [], 'b': [], 'c': [], 'd': [], 'e': [], 'f': [], 'g': [], 'h': [], 'i': [], 'z': []}
+F: {'c', 's'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': inf, 'h': inf, 'i': inf, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': [], 'h': [], 'i': [], 'z': []}
+F: {'c', 'd', 's'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': inf, 'h': inf, 'i': 19, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': [], 'h': [], 'i': ['s', 'c', 'i'], 'z': []}
+F: {'c', 'd', 's', 'f'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': inf, 'h': inf, 'i': 19, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': [], 'h': [], 'i': ['s', 'c', 'i'], 'z': []}
+F: {'s', 'f', 'c', 'd', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': inf, 'h': inf, 'i': 19, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': [], 'h': [], 'i': ['s', 'c', 'i'], 'z': []}
+F: {'s', 'e', 'f', 'c', 'd', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': inf, 'i': 19, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': [], 'i': ['s', 'c', 'i'], 'z': []}
+F: {'a', 's', 'e', 'f', 'c', 'd', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': inf, 'i': 19, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': [], 'i': ['s', 'c', 'i'], 'z': []}
+F: {'a', 's', 'e', 'f', 'i', 'c', 'd', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': inf, 'i': 19, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': [], 'i': ['s', 'c', 'i'], 'z': []}
+F: {'a', 's', 'e', 'h', 'f', 'i', 'c', 'd', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': 28, 'i': 19, 'z': 51} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': ['s', 'c', 'i', 'h'], 'i': ['s', 'c', 'i'], 'z': ['s', 'c', 'i', 'z']}
+F: {'a', 's', 'g', 'e', 'h', 'f', 'i', 'c', 'd', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': 28, 'i': 19, 'z': 50} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': ['s', 'c', 'i', 'h'], 'i': ['s', 'c', 'i'], 'z': ['s', 'c', 'i', 'h', 'z']}
+F: {'a', 's', 'g', 'e', 'z', 'h', 'f', 'i', 'c', 'd', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': 28, 'i': 19, 'z': 50} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': ['s', 'c', 'i', 'h'], 'i': ['s', 'c', 'i'], 'z': ['s', 'c', 'i', 'h', 'z']}
+\end{minted}
+
+\texttt{F} wird um \textbf{10} Knoten expandiert.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_05/djikstra}
+    \caption{Djkikstra}
+    \label{fig:djkistra_graph}
+\end{figure}
+
+\section{A*}\label{sec:astar}
+\begin{minted}[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    bgcolor=LightGray,
+    linenos,
+    breaklines
+]{text}
+F: {'s'} - dist: {'s': 0, 'a': inf, 'b': inf, 'c': inf, 'd': inf, 'e': inf, 'f': inf, 'g': inf, 'h': inf, 'i': inf, 'z': inf} - W: {'s': ['s'], 'a': [], 'b': [], 'c': [], 'd': [], 'e': [], 'f': [], 'g': [], 'h': [], 'i': [], 'z': []}
+F: {'b', 's'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': inf, 'h': inf, 'i': inf, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': [], 'h': [], 'i': [], 'z': []}
+F: {'c', 'b', 's'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': inf, 'i': 22, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': [], 'i': ['s', 'b', 'i'], 'z': []}
+F: {'c', 'b', 's', 'i'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': inf, 'i': 19, 'z': inf} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': [], 'i': ['s', 'c', 'i'], 'z': []}
+F: {'s', 'h', 'i', 'c', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': 28, 'i': 19, 'z': 51} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': ['s', 'c', 'i', 'h'], 'i': ['s', 'c', 'i'], 'z': ['s', 'c', 'i', 'z']}
+F: {'s', 'g', 'h', 'i', 'c', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': 28, 'i': 19, 'z': 50} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': ['s', 'c', 'i', 'h'], 'i': ['s', 'c', 'i'], 'z': ['s', 'c', 'i', 'h', 'z']}
+F: {'s', 'g', 'z', 'h', 'i', 'c', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7, 'd': 7, 'e': 10, 'f': 8, 'g': 29, 'h': 28, 'i': 19, 'z': 50} - W: {'s': ['s'], 'a': ['s', 'a'], 'b': ['s', 'b'], 'c': ['s', 'c'], 'd': ['s', 'd'], 'e': ['s', 'e'], 'f': ['s', 'f'], 'g': ['s', 'b', 'g'], 'h': ['s', 'c', 'i', 'h'], 'i': ['s', 'c', 'i'], 'z': ['s', 'c', 'i', 'h', 'z']}
+\end{minted}
+
+\texttt{F} wird um \textbf{6} Knoten expandiert.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_05/astar}
+    \caption{A*}
+    \label{fig:astar_graph}
+\end{figure}
+
+\newpage
+
+
 
 \chapter{Legal}
 Die Ausarbeitung der Aufgabe wurde durch \texttt{OpenAI - GPT-4.5 Turbo}, \texttt{OpenAI - GPT-4.5 Vision}, \texttt{Anthropic -- Claude 3 Opus},  \texttt{Kagi - FastGPT} mit mehreren unterschiedlichen Prompts und Custom Instructions unterstützt.
