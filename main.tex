@@ -16,18 +16,15 @@
 \usepackage{caption}
 \usepackage{listings}
 \usepackage{minted}
+\usepackage{subcaption}
+\usepackage{enumitem}
 \usemintedstyle{vs}
 
-\lsbset{
-    frame=tb,
-    aboveskip=3mm,
-    belowskip=3mm,
-    columns=flexible,
-    basicstyle={\small\ttfamily},
-    numbers=none,
-    breaklines=true,
-    tabsize=3
-}
+% Author and subject
+\author{Felix Hillebrand}
+\newcommand{\subject}{SSD4UE}
+
+\graphicspath{ {./images/} }
 
 % Set default font to OpenSans
 \renewcommand*\familydefault{\sfdefault}
@@ -61,7 +58,7 @@
 \newcommand{\coverpage}{
     \thispagestyle{cover}
     \begin{center}
-        {\includegraphics[height=3cm]{fh-logo}}\\[1cm]
+        % {\includegraphics[height=3cm]{fh-logo.png}}\\[1cm]
         {\LARGE \thetitle}\\[0.5cm]
         {\large \theauthor}\\
         \href{mailto:97hilfel@gmail.com}{97hilfel@gmail.com}\\
@@ -77,16 +74,14 @@
     \end{figure}
 }
 
-% Author and subject
-\author{Felix Hillebrand}
-\newcommand{\subject}{SSD4UE}
-
-\graphicspath{ {./images/} }
-
 % Main document
 \begin{document}
 
-\title{Subject~-~Exercise}
+% Color definitions
+\definecolor{LightGray}{gray}{0.9}
+\definecolor{DarkGray}{gray}{0.3}
+
+\title{AMS4~-~U02}
 \coverpage
 
 \pagenumbering{roman}
@@ -94,18 +89,96 @@
 \pagenumbering{arabic}
 \pagestyle{main}
 
-\chapter{Topic}
-\begin{enumerate}
-    % First main item
-    \item \label{item:backrefA} \hfill % Use hfill to move the figure to the next line
+\chapter{Bipartite Graphen}
     \begin{description}
-        \item[Aufgabe:] 
-         \hfill
+        \item[Aufgabe:] Bestimmen Sie für die Graphen A, B und C ob es sich um bipartite Graphen handelt, und geben sie falls möglich zei Knotenmegen an. \hfill
+        \begin{figure}[htbp]
+            \centering
+            \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_01/A}
+                \caption{A}
+                \label{fig:a01_a}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_01/B}
+                \caption{B}
+                \label{fig:a01_b}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_01/C}
+                \caption{C}
+                \label{fig:a01_c}
+            \end{subfigure}
+            \hfill
+        \end{figure}
         \item[Lösung:] \hfill \newline % Use hfill to move the figure to the next line
-            Solution
+        \begin{figure}[htbp]
+            \centering
+            \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_01/A_colored}
+                \caption{A - nicht Bipartit - Kante $\{5, 6\}$}
+                \label{fig:a01_a_colored}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_01/B_colored}
+                \caption{B - Bipartit}
+                \label{fig:a01_b_colored}
+            \end{subfigure}
+            \hfill
+            \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_01/C_colored}
+                \caption{C - Bipartit}
+                \label{fig:a01_c_colored}
+            \end{subfigure}
+            \hfill
+        \end{figure}
+
     \end{description}
-\end{enumerate}
 \newpage
+
+\chapter{Topologisches Sortieren}
+Ein prominentes Beispiel für das Erkennen von Zyklen ist das Serialisieren von Transaktionen in Datenbanksystemen.
+In der untenstehenden Tabelle ist der vom DBMS registrierte Ablaufplan angegeben.
+Transformieren Sie den Plan in einen gerichteten Graphen, der die Abhängigkeiten zwischen den Transaktionen abbildet und ermitteln Sie ob ein äquivalenter serieller Ablaufplan
+(Serie von Transaktionen ohne Verzahnung)
+existiert und geben Sie gegeben falls einen möglichen an.
+
+\textbf{Hinweis}: Gegeben 2 Transaktionen \texttt{a} und \texttt{b} $a != b$ und eine Tabelle X so gilt:
+
+\begin{itemize}
+    \item wenn \texttt{R, a, X} vor \texttt{W, b, X} dann \texttt{a} vor \texttt{b} im seriellen Plan)
+    \item wenn \texttt{W, a, X} vor \texttt{R, b, X} dann \texttt{a} vor \texttt{b} im seriellen Plan)
+    \item wenn \texttt{W, a, X} vor \texttt{W, b, X} dann \texttt{a} vor \texttt{b} im seriellen Plan)
+\end{itemize}
+
+\begin{table}[]
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        Id & AT & Tx & Table \\ \hline
+        1  & R  & 1  & A     \\ \hline
+        2  & W  & 1  & A     \\ \hline
+        3  & R  & 7  & B     \\ \hline
+        4  & R  & 2  & A     \\ \hline
+        5  & W  & 2  & A     \\ \hline
+        6  & R  & 1  & B     \\ \hline
+        7  & W  & 1  & B     \\ \hline
+        8  & R  & 2  & B     \\ \hline
+        9  & W  & 2  & B     \\ \hline
+        10 & R  & 3  & A     \\ \hline
+        11 & W  & 4  & A     \\ \hline
+        12 & R  & 5  & B     \\ \hline
+        13 & R  & 1  & C     \\ \hline
+        14 & R  & 6  & C     \\ \hline
+        15 & W  & 8  & A     \\ \hline
+        16 & W  & 8  & B     \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[]
+\end{figure}
 
 \chapter{Legal}
 Die Ausarbeitung der Aufgabe wurde durch \texttt{OpenAI - GPT-4.5 Turbo}, \texttt{OpenAI - GPT-4.5 Vision}, \texttt{Anthropic -- Claude 3 Opus},  \texttt{Kagi - FastGPT} mit mehreren unterschiedlichen Prompts und Custom Instructions unterstützt.
