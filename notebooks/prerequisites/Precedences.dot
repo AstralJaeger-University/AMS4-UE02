@@ -4,10 +4,10 @@ Fressen;
 "Andere Katze hauen";
 Klettern;
 "Krallen wetzen";
-"Einrichtung zerstören";
-"Rumbrüllen";
+"Einrichtung zerstÃ¶ren";
+"RumbrÃ¼llen";
 Trinken -> Fressen;
 "Andere Katze hauen" -> Klettern;
 "Krallen wetzen" -> Klettern;
-"Einrichtung zerstören" -> "Krallen wetzen";
+"Einrichtung zerstÃ¶ren" -> "Krallen wetzen";
 }
