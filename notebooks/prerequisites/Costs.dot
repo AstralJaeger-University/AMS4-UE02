@@ -1,0 +1,33 @@
+strict graph  {
+Fressen;
+Bad;
+Wohnzimmer;
+"Büro";
+Trinken;
+Schlafzimmer;
+Klettern;
+"Andere Katze hauen";
+"Krallen wetzen";
+"Einrichtung zerstören";
+"Rumbrüllen";
+Fressen -- Bad  [weight=2];
+Fressen -- Wohnzimmer  [weight=2];
+Fressen -- "Büro"  [weight="0.5"];
+Bad -- Trinken  [weight="3.5"];
+Bad -- Klettern  [weight=1];
+Bad -- "Andere Katze hauen"  [weight=4];
+Bad -- "Krallen wetzen"  [weight=20];
+Bad -- "Einrichtung zerstören"  [weight=0];
+Bad -- "Rumbrüllen"  [weight=10];
+Wohnzimmer -- Klettern  [weight=2];
+Wohnzimmer -- "Andere Katze hauen"  [weight=8];
+Wohnzimmer -- "Krallen wetzen"  [weight=5];
+Wohnzimmer -- "Einrichtung zerstören"  [weight=0];
+"Büro" -- Klettern  [weight="0.5"];
+"Büro" -- "Andere Katze hauen"  [weight="0.5"];
+"Büro" -- "Krallen wetzen"  [weight=20];
+"Büro" -- "Einrichtung zerstören"  [weight=0];
+Trinken -- Schlafzimmer  [weight="1.5"];
+Schlafzimmer -- "Krallen wetzen"  [weight=2];
+Schlafzimmer -- "Einrichtung zerstören"  [weight=0];
+}

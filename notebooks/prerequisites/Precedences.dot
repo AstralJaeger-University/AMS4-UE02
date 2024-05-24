@@ -1,0 +1,13 @@
+strict digraph  {
+Trinken;
+Fressen;
+"Andere Katze hauen";
+Klettern;
+"Krallen wetzen";
+"Einrichtung zerstören";
+"Rumbrüllen";
+Trinken -> Fressen;
+"Andere Katze hauen" -> Klettern;
+"Krallen wetzen" -> Klettern;
+"Einrichtung zerstören" -> "Krallen wetzen";
+}

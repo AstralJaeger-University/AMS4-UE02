@@ -24,7 +24,7 @@
 \author{Felix Hillebrand}
 \newcommand{\subject}{SSD4UE}
 
-\graphicspath{ {./images/} }
+\graphicspath{ {./images/} {./notebooks/assets/ }}
 
 % Set default font to OpenSans
 \renewcommand*\familydefault{\sfdefault}
@@ -208,6 +208,7 @@ Abhängigkeiten für Tabelle \texttt{C}:
 Es gibt keine schreioperationen für Tabelle \texttt{C}
 
 \begin{figure}[htbp]
+    \centering
     \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_02/dependency_graph}
     \caption{Dependency Graph}
     \label{fig:a02_dependency_graph}
@@ -228,7 +229,6 @@ Die Kosten die Aurora aufwenden muss, um von einem ort zum anderen zu kommen fin
 
 Nutzen Sie einen geeigneten Algorithmus (tiefensuche, Breitensuche, Branch-Bound, etc.) um die günstigste Lösung für Auroras Problem zu finden.
 
-
 \chapter{Snake}
 
 Ein Optimaler Snake-Spieler, der Garantiert die maximale Punkte Anuzahl erreichen möchte, wählt einen Hamilton Zyklus auf dem Spielfeld und folgt diesem stur, bis die Schlange die maximale Länge erreicht hat, ohne sich von Futterknoten (schwarz) ablenken zu lassen (da er/sie sie sicher reichen wird).
@@ -245,6 +245,7 @@ Die roten werte bei den Knoten entsprechen jener der Heursistik für diesen Knot
 Wie viele Knoten expandiert (d.h. hinzufügen in F) der Algorithmus von Djikstra und wie viele der A*?
 
 \section{Djikstra}\label{sec:djikstra}
+
 \begin{minted}[
     frame=lines,
     framesep=2mm,
@@ -270,12 +271,13 @@ F: {'a', 's', 'g', 'e', 'z', 'h', 'f', 'i', 'c', 'd', 'b'} - dist: {'s': 0, 'a':
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_05/djikstra}
+    \includegraphics[height=0.2\textheight]{notebooks/assets/aufgabe_05/djikstra.png}
     \caption{Djkikstra}
     \label{fig:djkistra_graph}
 \end{figure}
 
 \section{A*}\label{sec:astar}
+
 \begin{minted}[
     frame=lines,
     framesep=2mm,
@@ -304,9 +306,60 @@ F: {'s', 'g', 'z', 'h', 'i', 'c', 'b'} - dist: {'s': 0, 'a': 11, 'b': 10, 'c': 7
 
 \newpage
 
+\chapter{Ausflugsplanung (Partnerarbeit)}
 
+Aurora und Aurelia planen ein kurzen Amerika Trip:
+Sie müssen die Flughäfen Newark (\texttt{49611}), JFK (\texttt{212410}) und LaGuardia (\texttt{198373}) besuchen, um dort die Flughafensicherheit sowie die Mäusepopulation zu kontrollieren.
+Da derzeit leider nur JFK mit Heißluftballon angeflogen werden kann, müssen Newark und LaGuardia zu Fuß erreicht werden.
+Unterstützen Sie die beiden, indem Sie die kürzesten Wegen zwischen den Flughäfen mittels Djikstra Algorithmus ermitteln.
+Sie finden ein Routingnetz in den Dateiimportfunktionen im \texttt{ipynb}.
+
+Ermitteln Sie die paarweise kürzesten Wege und zeichnen Sie die kürzeste Rundreise.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=3cm]{notebooks/assets/aufgabe_06/jfk}
+    \caption{JFK}
+    \label{fig:jfk}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=3cm]{notebooks/assets/aufgabe_06/laguardia}
+    \caption{LaGuardia}
+    \label{fig:laguardia}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=3cm]{notebooks/assets/aufgabe_06/newark}
+    \caption{NewArk}
+    \label{fig:newark}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=3cm]{notebooks/assets/aufgabe_06/jfk-laguardia}
+    \caption{JFK - LaGuardia}
+    \label{fig:jfk-laguardia}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=3cm]{notebooks/assets/aufgabe_06/laguardia-newark}
+    \caption{LaGuardia - NewArk}
+    \label{fig:laguardia-newark}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=3cm]{notebooks/assets/aufgabe_06/roundtrip}
+    \caption{Roundtrip}
+    \label{fig:roundtrip}
+\end{figure}
+\newpage
 
 \chapter{Legal}
-Die Ausarbeitung der Aufgabe wurde durch \texttt{OpenAI - GPT-4.5 Turbo}, \texttt{OpenAI - GPT-4.5 Vision}, \texttt{Anthropic -- Claude 3 Opus},  \texttt{Kagi - FastGPT} mit mehreren unterschiedlichen Prompts und Custom Instructions unterstützt.
+Die Ausarbeitung der Aufgabe wurde durch \texttt{OpenAI - GPT-4.5 Turbo}, \texttt{OpenAI - GPT-4.5 Vision}, \texttt{OpenAI - GPT-4o}, \texttt{Anthropic -- Claude 3 Opus},  \texttt{Kagi - FastGPT} mit mehreren unterschiedlichen Prompts und Custom Instructions unterstützt.
 
 \end{document}

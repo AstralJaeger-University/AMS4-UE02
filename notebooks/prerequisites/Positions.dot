@@ -1,0 +1,16 @@
+graph  {
+Bad;
+Wohnzimmer;
+"Büro";
+Schlafzimmer;
+Bad -- Bad  [weight=0];
+Bad -- Wohnzimmer  [weight=1];
+Bad -- Schlafzimmer  [weight="6.5"];
+Bad -- "Büro"  [weight="1.5"];
+Wohnzimmer -- Wohnzimmer  [weight=0];
+Wohnzimmer -- "Büro"  [weight="0.5"];
+Wohnzimmer -- Schlafzimmer  [weight="5.5"];
+"Büro" -- "Büro"  [weight=0];
+"Büro" -- Schlafzimmer  [weight=5];
+Schlafzimmer -- Schlafzimmer  [weight=0];
+}
